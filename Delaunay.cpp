@@ -1,4 +1,4 @@
-// #include "LKH.h"
+#include "ctsp.h"
 #include "Delaunay.h"
 #include <cassert>
 #include <cstdlib>
@@ -22,7 +22,6 @@
  * 
  * See the copyright notice at the end of this file.
  */
-
 static edge *join(edge * a, point * u, edge * b, point * v, side s);
 static void delete_edge(edge * e);
 static void splice(edge * a, edge * b, point * v);
@@ -50,20 +49,18 @@ typedef unsigned int cardinal;
 typedef int integer;
 typedef unsigned char boolean;
 
-void delaunay(int n)
+void delaunay(std::vector<Node*>& nodes)
 {
     edge *l_cw, *r_ccw;
     point **p_sorted;
-    Node *N = FirstNode;
     int Duplicates = 0, i, j;
-
+    int n = nodes.size();
     alloc_memory(n);
     for (i = 0; i < n; i++) {
-        p_array[i].x = N->X;
-        p_array[i].y = N->Y;
-        p_array[i].id = N->Id;
+        p_array[i].x = nodes[i]->x;
+        p_array[i].y = nodes[i]->y;
+        p_array[i].id = nodes[i]->id;
         p_array[i].entry_pt = 0;
-        N = N->Suc;
     }
 
     p_sorted = (point **) malloc(n * sizeof(point *));

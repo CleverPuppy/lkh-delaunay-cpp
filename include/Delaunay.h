@@ -1,6 +1,7 @@
 #ifndef _DELAUNAY_H
 #define _DELAUNAY_H
-
+#include <vector>
+#include "ctsp.h"
 /* 
  * This header specifies the interface for the use of Delaunay graphs. 
  */
@@ -41,18 +42,19 @@ typedef enum {right, left} side;
 
 extern point *p_array;
 
-void delaunay(int n);
+void delaunay(std::vector<Node*>& nodes);
 void free_memory();
+void CreateDelaunayCandidateSet(CTSP& ctsp);
 
-// #define HAVE_NEXTAFTERF
+#define HAVE_NEXTAFTERF
 
 /* Undefine if you don't have the nextafterf function */
-#undef HAVE_NEXTAFTERF 
+// #undef HAVE_NEXTAFTERF 
 
-// #define HAVE_SCALBNF
+#define HAVE_SCALBNF
 
 /* Undefine if you don't have the scalbnf function */
-#undef HAVE_SCALBNF
+// #undef HAVE_SCALBNF
 
 #ifndef HAVE_SCALBNF
 float scalbnf(const float x, const int n);
